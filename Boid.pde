@@ -13,13 +13,6 @@ class Boid {
     acceleration = new PVector(0, 0, 0);
     velocity = new PVector(random(-5, 5), random(-5, 5), random(-5, 5));
     location = l;
-
-    //    radius = _radius;
-    //    maxForce = .05;
-    //    maxSpeed = 1;
-    //    desiredSeparation = 50.0;
-    //    alignThreshold = 150.0;
-    //    cohesionThreshold = 150.0;
   }
 
   // An ArrayList of boids is being passed to run() from the Flock class.
@@ -60,26 +53,27 @@ class Boid {
   }
 
   void drawHistory() {
-    if (frameCount % 30 == 0) {
+    if (frameCount % 10 == 0) {
       history.add(location.get());
     }
-    if (history.size() > 15) {
-      for (int i=history.size(); i<history.size()-15; i--) {
-        //get the last 15 locations from the array list
-        PVector historyLoc = new PVector(history.get(i).x, history.get(i).y, history.get(i).z);      
-        translate(history.get(i).x, history.get(i).y, history.get(i).z);
-        pushMatrix();
-        noStroke();
-        box(20);
-        popMatrix();
+
+
+    for (int i=0; i<history.size(); i++) {   
+      if (i > 0) {   
+        PVector currentLoc = new PVector(history.get(i).x, history.get(i).y, history.get(i).z);
+        PVector previousLoc = new PVector(history.get(i-1).x, history.get(i-1).y, history.get(i-1).z);
+        stroke(map(dist(currentLoc.x, currentLoc.y, currentLoc.z, 0, 0, 0), 0, 1250, 0, 100), 100, 100, 50);
+        line(currentLoc.x, currentLoc.y, currentLoc.z, previousLoc.x, previousLoc.y, previousLoc.z );
       }
     }
   }
 
+
+
   void render() {
     colorMode(HSB, 100);
     //float theta = velocity.heading() + radians(90);
-    fill(map(dist(location.x, location.y, location.z, 0, 0, 0), 0, 800, 0, 100), 100, 100);
+    fill(map(dist(location.x, location.y, location.z, 0, 0, 0), 0, 1250, 0, 100), 100, 100,25);
     radius = map(dist(location.x, location.y, location.z, 0, 0, 0), 0, 400, 25, 2);
     pushMatrix();
     translate(location.x, location.y, location.z);
@@ -91,28 +85,28 @@ class Boid {
 
   // This method makes the boids bounce off the edges
   void borders() {
-    if (location.x - radius < -250) { 
-      location.x = -250 + radius;
+    if (location.x - radius < -1000) { 
+      location.x = -1000 + radius;
       velocity.x *= -1;
     }
-    if (location.x + radius > 250) { 
-      location.x = 250 - radius;
+    if (location.x + radius > 1000) { 
+      location.x = 1000 - radius;
       velocity.x *= -1;
     }
-    if (location.y - radius < -250) { 
-      location.y = -250 + radius;
+    if (location.y - radius < -1000) { 
+      location.y = -1000 + radius;
       velocity.y *= -1;
     }
-    if (location.y + radius > 250) { 
-      location.y = 250 - radius;
+    if (location.y + radius > 1000) { 
+      location.y = 1000 - radius;
       velocity.y *= -1;
     }
-    if (location.z - radius < -250) { 
-      location.z = -250 + radius;
+    if (location.z - radius < -1000) { 
+      location.z = -1000 + radius;
       velocity.z *= -1;
     }
-    if (location.z + radius > 250) { 
-      location.z = 250 - radius;
+    if (location.z + radius > 1000) { 
+      location.z = 1000 - radius;
       velocity.z *= -1;
     }
   }
