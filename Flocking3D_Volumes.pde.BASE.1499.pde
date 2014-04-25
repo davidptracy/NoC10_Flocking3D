@@ -1,11 +1,3 @@
-import toxi.geom.*;
-import toxi.geom.mesh.*;
-import toxi.volume.*;
-import toxi.math.waves.*;
-import toxi.processing.*;
-
-
-
 import peasy.*;
 import processing.opengl.*;
 
@@ -22,19 +14,16 @@ float desiredSeparation, alignThreshold, cohesionThreshold;
 float camRot;
 Flock flock;
 
-VBrush brush;
-
 void setup() {
   size(800, 800, OPENGL);
+  smooth();
 
-//  smooth();
-  
   sepVal = 8.5;
   aliVal = 4.5;
   cohVal = 8;
 
   maxForce = .08;
-  maxSpeed = 3;
+  maxSpeed = 8;
   desiredSeparation = 200;
   alignThreshold = 175;
   cohesionThreshold = 50;
@@ -52,7 +41,7 @@ void setup() {
   sliders.addSlider("aliVal", 0, 10, aliVal, 20, 120, 100, 10);
   sliders.addSlider("cohVal", 0, 10, cohVal, 20, 140, 100, 10);
   //  sliders.addSlider("radius", 0, 10, 5, 20, 160, 100, 10);
-  sliders.addSlider("maxForce", 0, .2, maxForce, 20, 180, 100, 10);
+  sliders.addSlider("maxForce", 0, 1, maxForce, 20, 180, 100, 10);
   sliders.addSlider("maxSpeed", 0, 10, maxSpeed, 20, 200, 100, 10);
   sliders.addSlider("desiredSeparation", 0, 250, desiredSeparation, 20, 220, 100, 10);
   sliders.addSlider("alignThreshold", 0, 250, alignThreshold, 20, 240, 100, 10);
@@ -62,11 +51,7 @@ void setup() {
 
 
   //  Initializes the flock with an initial set of boids
-<<<<<<< HEAD:Flocking3D_Volumes.pde
-  int startCount = 10;
-=======
-  int startCount = 25;
->>>>>>> 1838061669b1e09649f20327358985776ae8e833:Flocking3D_02.pde
+  int startCount = 200;
   flock = new Flock();
   for (int i=0; i<startCount; i++) {
     Boid b = new Boid(PVector.random3D(), radius);
@@ -84,11 +69,7 @@ void draw() {
 
   colorMode(RGB);
   // Axis for world coordinate system
-<<<<<<< HEAD:Flocking3D_Volumes.pde
-  //  strokeWeight(3);
-=======
-//  strokeWeight(3);
->>>>>>> 1838061669b1e09649f20327358985776ae8e833:Flocking3D_02.pde
+  strokeWeight(3);
   stroke(255, 0, 0);
   line(0, 0, 0, 50, 0, 0);
   stroke(0, 255, 0);
@@ -109,6 +90,10 @@ void draw() {
 
   if (keyPressed) flock.addBoid(new Boid(PVector.random3D(), radius));
 }
+
+//void keyPressed() {
+//  flock.addBoid(new Boid(0,0,0, radius));
+//}
 
 void gui() {
   currCameraMatrix = new PMatrix3D(g3.camera);

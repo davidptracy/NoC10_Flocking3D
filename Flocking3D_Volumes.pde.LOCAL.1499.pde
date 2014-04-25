@@ -62,11 +62,7 @@ void setup() {
 
 
   //  Initializes the flock with an initial set of boids
-<<<<<<< HEAD:Flocking3D_Volumes.pde
   int startCount = 10;
-=======
-  int startCount = 25;
->>>>>>> 1838061669b1e09649f20327358985776ae8e833:Flocking3D_02.pde
   flock = new Flock();
   for (int i=0; i<startCount; i++) {
     Boid b = new Boid(PVector.random3D(), radius);
@@ -84,11 +80,7 @@ void draw() {
 
   colorMode(RGB);
   // Axis for world coordinate system
-<<<<<<< HEAD:Flocking3D_Volumes.pde
   //  strokeWeight(3);
-=======
-//  strokeWeight(3);
->>>>>>> 1838061669b1e09649f20327358985776ae8e833:Flocking3D_02.pde
   stroke(255, 0, 0);
   line(0, 0, 0, 50, 0, 0);
   stroke(0, 255, 0);

@@ -11,11 +11,7 @@ class Flock {
     for (Boid b : boids) {
       b.run(boids);  // Passing the entire list of boids to each boid individually
     }
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 1838061669b1e09649f20327358985776ae8e833
     println(boids.get(0).history.size());
   }
 
